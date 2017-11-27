@@ -1,0 +1,61 @@
+int i = -1;
+        int len = data.length();
+        std::string sentence = "", finalSentence = "", finalProgram = "", mainProgram = "", space = "";
+
+        while (i != len) {
+            i++;
+
+            sentence += data[i];
+            if (sentence == " ") {
+                sentence = "";
+            }
+
+            if (sentence == "\n") {
+                sentence = "";
+            }
+
+            if (sentence == "#include") {
+                finalSentence += "using ";
+                sentence = "";
+            }
+
+            if (sentence == "<iostream>" || sentence == "<string>") {
+                finalSentence += "System;";
+                sentence = "";
+            }
+
+            if (sentence != "") {
+                ChargeSentence::charge(sentence);
+                if (sentence == "using+namespace+std;") {
+                    finalSentence += "\n";
+                    sentence = "";
+                }
+                if (sentence == "int+main()+{" || sentence == "int+main()") {
+                    ChargeSentence::surf(finalProgram, "");
+                    sentence = "";
+                }
+            }
+        }
+
+        std::cout << finalSentence;
+
+
+
+        bool f = false;
+        for (int i = 0; i < data.length(); i++) {
+            if (f == true) {
+                std::string line[100][100];
+                for (int j = 0, o = 0, k = 0; j < data.length(); j++) {
+                    if (data[i] == '\n') {
+                        k++;
+                    } else {
+                        line[k][o] = data[i];
+                        o++;
+                    }
+                }
+                std::cout << line[0][1] << std::endl;
+            }
+            if (data[i] == '\n') {
+                f = true;
+            }
+        }
